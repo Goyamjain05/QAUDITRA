@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quantum Privacy Audit Report</title>
+
+    <style>
+        /* ====== GLOBAL STYLING ====== */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f7f8;
+            color: #333;
+            padding: 40px;
+        }
+
+        /* ====== PAGE TITLE ====== */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            font-size: 40px;
+        }
+
+        /* ====== SUMMARY TABLE STYLING ====== */
+        .summary-table {
+            margin: 0 auto 40px;
+            border-collapse: collapse;
+            width: 80%;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .summary-table th, .summary-table td {
+            padding: 12px 20px;
+            text-align: left;
+        }
+
+        .summary-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .summary-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* ====== ACCORDION (COLLAPSIBLE DETAILS) ====== */
+        .accordion {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: #007bff;
+            color: white;
+            padding: 16px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .accordion-content {
+            display: none; /* Hidden by default, toggled by JS */
+            padding: 20px;
+        }
+
+        /* ====== SCORE BADGE ====== */
+        .score-badge {
+            float: right;
+            background: #ff416c;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+        }
+
+        /* ====== INDIVIDUAL ISSUE BOX ====== */
+        .issue {
+            background-color: #f7f9fc;
+            border-left: 5px solid #ffc107;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+
+        /* ====== WHEN NO ISSUES FOUND ====== */
+        .no-issues {
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #155724;
+        }
+
+        /* ====== INLINE CODE BLOCK ====== */
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* ====== FOOTER ====== */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+
+    <script>
+        /* ====== TOGGLE ACCORDION CONTENT ======
+           Called when a user clicks a file header.
+           Shows/hides the detailed findings for that file.
+        */
+        function toggleAccordion(index) {
+            const content = document.getElementById("content-" + index);
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</head>
+
+<body>
+    <!-- ====== MAIN TITLE ====== -->
+    <h1>🛡️ Quantum Privacy Audit Report</h1>
+
+    <!-- ====== SUMMARY TABLE (OVERVIEW OF FILES) ====== -->
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>📁 File Name</th>
+                <th>🔐 Privacy Risk Score</th>
+                <th>⚠️ Issues Found</th>
+                <th>📊 Risk %</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Jinja2 loop to populate table rows dynamically -->
+            
+            <tr>
+                <td>data\copy1.csv</td>
+                <td>52 / 100</td>
+                <td>10</td>
+                <td>52.0%</td>
+            </tr>
+            
+            <tr>
+                <td>data\copy2.csv</td>
+                <td>52 / 100</td>
+                <td>10</td>
+                <td>52.0%</td>
+            </tr>
+            
+            <tr>
+                <td>data\sample_data.csv</td>
+                <td>52 / 100</td>
+                <td>10</td>
+                <td>52.0%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <!-- ====== DETAILED FINDINGS SECTION ====== -->
+    <div class="accordion">
+        
+        <div class="accordion-item">
+            <!-- File header clickable to toggle details -->
+            <div class="accordion-header" onclick="toggleAccordion(1)">
+                data\copy1.csv
+                <span class="score-badge">52 / 100</span>
+            </div>
+
+            <!-- Collapsible section for this file's findings -->
+            <div class="accordion-content" id="content-1">
+                
+                    
+                    <div class="issue">
+                        <b>⚠️ PERSON</b> at row <code>0</code>, column <code>name</code><br>
+                        Original: <code>John Doe</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Email</b> at row <code>0</code>, column <code>email</code><br>
+                        Original: <code>john@example.com</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ SSN</b> at row <code>0</code>, column <code>ssn</code><br>
+                        Original: <code>123-45-6789</code><br>
+                        
+                        Masked: <code>001-11-0111</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Phone</b> at row <code>0</code>, column <code>phone</code><br>
+                        Original: <code>9876543210</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Aadhaar</b> at row <code>0</code>, column <code>aadhaar</code><br>
+                        Original: <code>1234 5678 9012</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ DATE</b> at row <code>0</code>, column <code>aadhaar</code><br>
+                        Original: <code>1234 5678 9012</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ PAN</b> at row <code>0</code>, column <code>pan</code><br>
+                        Original: <code>ABCDE1234F</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ PERSON</b> at row <code>0</code>, column <code>pan</code><br>
+                        Original: <code>ABCDE1234F</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ DATE</b> at row <code>0</code>, column <code>notes</code><br>
+                        Original: <code>12 Jan</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ GPE</b> at row <code>0</code>, column <code>notes</code><br>
+                        Original: <code>Delhi</code><br>
+                        
+                    </div>
+                    
+                
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <!-- File header clickable to toggle details -->
+            <div class="accordion-header" onclick="toggleAccordion(2)">
+                data\copy2.csv
+                <span class="score-badge">52 / 100</span>
+            </div>
+
+            <!-- Collapsible section for this file's findings -->
+            <div class="accordion-content" id="content-2">
+                
+                    
+                    <div class="issue">
+                        <b>⚠️ PERSON</b> at row <code>0</code>, column <code>name</code><br>
+                        Original: <code>John Doe</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Email</b> at row <code>0</code>, column <code>email</code><br>
+                        Original: <code>john@example.com</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ SSN</b> at row <code>0</code>, column <code>ssn</code><br>
+                        Original: <code>123-45-6789</code><br>
+                        
+                        Masked: <code>110-01-0110</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Phone</b> at row <code>0</code>, column <code>phone</code><br>
+                        Original: <code>9876543210</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Aadhaar</b> at row <code>0</code>, column <code>aadhaar</code><br>
+                        Original: <code>1234 5678 9012</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ DATE</b> at row <code>0</code>, column <code>aadhaar</code><br>
+                        Original: <code>1234 5678 9012</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ PAN</b> at row <code>0</code>, column <code>pan</code><br>
+                        Original: <code>ABCDE1234F</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ PERSON</b> at row <code>0</code>, column <code>pan</code><br>
+                        Original: <code>ABCDE1234F</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ DATE</b> at row <code>0</code>, column <code>notes</code><br>
+                        Original: <code>12 Jan</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ GPE</b> at row <code>0</code>, column <code>notes</code><br>
+                        Original: <code>Delhi</code><br>
+                        
+                    </div>
+                    
+                
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <!-- File header clickable to toggle details -->
+            <div class="accordion-header" onclick="toggleAccordion(3)">
+                data\sample_data.csv
+                <span class="score-badge">52 / 100</span>
+            </div>
+
+            <!-- Collapsible section for this file's findings -->
+            <div class="accordion-content" id="content-3">
+                
+                    
+                    <div class="issue">
+                        <b>⚠️ PERSON</b> at row <code>0</code>, column <code>name</code><br>
+                        Original: <code>John Doe</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Email</b> at row <code>0</code>, column <code>email</code><br>
+                        Original: <code>john@example.com</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ SSN</b> at row <code>0</code>, column <code>ssn</code><br>
+                        Original: <code>123-45-6789</code><br>
+                        
+                        Masked: <code>111-00-1111</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Phone</b> at row <code>0</code>, column <code>phone</code><br>
+                        Original: <code>9876543210</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ Aadhaar</b> at row <code>0</code>, column <code>aadhaar</code><br>
+                        Original: <code>1234 5678 9012</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ DATE</b> at row <code>0</code>, column <code>aadhaar</code><br>
+                        Original: <code>1234 5678 9012</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ PAN</b> at row <code>0</code>, column <code>pan</code><br>
+                        Original: <code>ABCDE1234F</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ PERSON</b> at row <code>0</code>, column <code>pan</code><br>
+                        Original: <code>ABCDE1234F</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ DATE</b> at row <code>0</code>, column <code>notes</code><br>
+                        Original: <code>12 Jan</code><br>
+                        
+                    </div>
+                    
+                    <div class="issue">
+                        <b>⚠️ GPE</b> at row <code>0</code>, column <code>notes</code><br>
+                        Original: <code>Delhi</code><br>
+                        
+                    </div>
+                    
+                
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- ====== FOOTER ====== -->
+    <div class="footer">
+        🚀 Generated by <b>Q-AUDITRA</b> | Autonomous Quantum Privacy Audit System<br>
+        Designed with 💙 for data privacy excellence
+    </div>
+</body>
+</html>
